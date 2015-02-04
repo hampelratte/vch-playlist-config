@@ -36,8 +36,9 @@ import de.berlios.vch.web.servlets.VchHttpServlet;
 @Component
 @Provides
 public class ConfigServlet extends VchHttpServlet implements ResourceBundleProvider {
+	private static final long serialVersionUID = 1L;
 
-    public static String PATH = "/config/playlist";
+	public static String PATH = "/config/playlist";
     @Requires
     private LogService logger;
 
@@ -53,7 +54,7 @@ public class ConfigServlet extends VchHttpServlet implements ResourceBundleProvi
 
     private BundleContext ctx;
 
-    private ServiceRegistration menuReg;
+    private ServiceRegistration<IWebMenuEntry> menuReg;
 
     private ResourceBundle resourceBundle;
 
@@ -111,7 +112,7 @@ public class ConfigServlet extends VchHttpServlet implements ResourceBundleProvi
             entry.setLinkUri(ConfigServlet.PATH);
             childs.add(entry);
             menu.setChilds(childs);
-            menuReg = ctx.registerService(IWebMenuEntry.class.getName(), menu, null);
+            menuReg = ctx.registerService(IWebMenuEntry.class, menu, null);
         } catch (Exception e) {
             logger.log(LogService.LOG_ERROR, "Couldn't register playlist config servlet", e);
         }
