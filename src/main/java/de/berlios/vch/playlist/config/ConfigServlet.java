@@ -36,9 +36,9 @@ import de.berlios.vch.web.servlets.VchHttpServlet;
 @Component
 @Provides
 public class ConfigServlet extends VchHttpServlet implements ResourceBundleProvider {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static String PATH = "/config/playlist";
+    public static String PATH = "/config/playlist";
     @Requires
     private LogService logger;
 
@@ -74,11 +74,10 @@ public class ConfigServlet extends VchHttpServlet implements ResourceBundleProvi
         }
 
         params.put("TITLE", getResourceBundle().getString("I18N_PLAYLIST_CONFIG"));
-        params.put("SERVLET_URI",
-                req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getServletPath());
+        params.put("SERVLET_URI", req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getServletPath());
         params.put("ACTION", PATH);
         params.put("svdrp_host", prefs.get("svdrp.host", "localhost"));
-        params.put("svdrp_port", prefs.get("svdrp.port", "2001"));
+        params.put("svdrp_port", prefs.get("svdrp.port", "6419"));
         params.put("NOTIFY_MESSAGES", getNotifyMessages(req));
 
         String page = templateLoader.loadTemplate("config.ftl", params);
